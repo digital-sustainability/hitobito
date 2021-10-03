@@ -23,3 +23,7 @@
 Fabricator(:subscription) do
   subscriber { Fabricate(:person) }
 end
+
+Fabricator(:subscription_with_subscriber_with_address, from: :subscription) do
+  subscriber { Fabricate(:person_with_address) }
+end

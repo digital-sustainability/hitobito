@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_24_205310) do
+ActiveRecord::Schema.define(version: 2021_09_29_143105) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -559,6 +559,7 @@ ActiveRecord::Schema.define(version: 2021_09_24_205310) do
     t.string "salutation"
     t.string "pp_post"
     t.string "shipping_method", default: "own"
+    t.boolean "send_to_households", default: false
     t.index ["invoice_list_id"], name: "index_messages_on_invoice_list_id"
     t.index ["mailing_list_id"], name: "index_messages_on_mailing_list_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
