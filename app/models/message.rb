@@ -125,12 +125,12 @@ class Message < ActiveRecord::Base
     @total_recipient_count ||= mailing_list.people_count
   end
 
-  def valid_recipient_count
+  def valid_recipient_count(households: false)
     raise 'implement in subclass'
   end
 
-  def invalid_recipient_count
-    total_recipient_count - valid_recipient_count
+  def invalid_recipient_count(households: false)
+    total_recipient_count(households: households) - valid_recipient_count(households: households)
   end
 
 end

@@ -44,9 +44,20 @@ class Message::Letter < Message
 
   self.duplicatable_attrs << 'body' << 'heading' << 'salutation'
 
-  def valid_recipient_count
-    require 'pry'; binding.pry unless $pstop
-    @valid_recipient_count ||= mailing_list.people_count(Person.with_address.distinct(:household_key))
+  def valid_recipient_count(households: false)
+    @valid_recipient_count ||= if households
+                                 mailing_list.household_count(Person.with_address)
+                               else
+                                 mailing_list.people_count(Person.with_address)
+                               end
+  end
+
+  def total_recipient_count(households: false)
+    @total_recipient_count ||= if households
+                                 mailing_list.household_count
+                               else
+                                 mailing_list.people_count
+                               end
   end
 
   def recipients

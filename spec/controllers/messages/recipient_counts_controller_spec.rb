@@ -53,10 +53,10 @@ describe Messages::RecipientCountsController do
       end
 
       it 'returns count' do
-        get :show, params: { message_id: message.id, households: false, format: :json }
+        get :show, params: { message_id: message.id, households: true, format: :json }
 
         expect(response_data[:valid_recipient_count]).to eq(15)
-        # expect(response_data[:invalid_recipient_count]).to eq(10)
+        expect(response_data[:invalid_recipient_count]).to eq(10)
       end
     end
   end
@@ -76,7 +76,7 @@ describe Messages::RecipientCountsController do
   end
 
   def fabricate_valid_households_recipient
-    housemate1 = fabricate_invalid_person_recipient.subscriber
+    housemate1 = fabricate_valid_person_recipient.subscriber
     housemate2 = fabricate_valid_person_recipient.subscriber
     
     fake_ability = instance_double('aby', cannot?: true)

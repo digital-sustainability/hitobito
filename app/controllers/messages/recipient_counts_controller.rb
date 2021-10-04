@@ -25,15 +25,11 @@ class Messages::RecipientCountsController < ApplicationController
   end
 
   def valid_count
-    if true?(params[:households])
-      message.valid_count
-    else
-      message.valid_recipient_count
-    end
+    message.valid_recipient_count(households: true?(params[:households]))
   end
 
   def invalid_count
-    message.invalid_recipient_count
+    message.invalid_recipient_count(households: true?(params[:households]))
   end
 
   def authorize_action
