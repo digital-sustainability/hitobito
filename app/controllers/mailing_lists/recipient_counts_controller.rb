@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
 
-class Messages::RecipientCountsController < ApplicationController
+class MailingLists::RecipientCountsController < ApplicationController
 
   before_action :authorize_action, only: [:show]
 
@@ -37,6 +37,6 @@ class Messages::RecipientCountsController < ApplicationController
   end
 
   def message
-    Message.find(params[:message_id])
+    Message.new(type: params[:message_type], mailing_list_id: params[:mailing_list_id])
   end
 end

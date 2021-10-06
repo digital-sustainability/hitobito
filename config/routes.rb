@@ -213,6 +213,7 @@ Hitobito::Application.routes.draw do
 
       resources :mailing_lists do
         resources :messages
+        resource :recipient_count, only: [:show], module: :mailing_lists
 
         resources :subscriptions, only: [:index, :destroy] do
           collection do
@@ -320,7 +321,6 @@ Hitobito::Application.routes.draw do
     resources :messages, only: [:show] do
       resource :preview, only: [:show], module: :messages
       resource :dispatch, only: [:create, :show], module: :messages
-      resource :recipient_count, only: [:show], module: :messages
     end
   end # scope locale
 

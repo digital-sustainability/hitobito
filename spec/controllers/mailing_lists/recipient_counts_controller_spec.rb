@@ -7,15 +7,15 @@
 
 require 'spec_helper'
 
-describe Messages::RecipientCountsController do
+describe MailingLists::RecipientCountsController do
   let(:top_leader) { people(:top_leader) }
   let(:bottom_member) { people(:bottom_member) }
+  let(:mailing_list) { mailing_lists(:leaders) }
 
   before { sign_in(top_leader) }
 
   context 'GET index' do
     context 'without households' do
-      let(:message) { messages(:letter) }
 
       before do
         20.times do
@@ -28,7 +28,7 @@ describe Messages::RecipientCountsController do
       end
 
       it 'returns count' do
-        get :show, params: { message_id: message.id, households: false, format: :json }
+        get :show, params: { group_id: mailing_list.group.id, mailing_list_id: mailing_list.id, message_type: 'Message::Letter', households: false, format: :json }
 
         expect(response_data[:valid_recipient_count]).to eq(20)
         expect(response_data[:invalid_recipient_count]).to eq(10)
@@ -36,7 +36,6 @@ describe Messages::RecipientCountsController do
     end
 
     context 'with households' do
-      let(:message) { messages(:letter) }
 
       before do
         5.times do
@@ -53,7 +52,7 @@ describe Messages::RecipientCountsController do
       end
 
       it 'returns count' do
-        get :show, params: { message_id: message.id, households: true, format: :json }
+        get :show, params: { group_id: mailing_list.group.id, mailing_list_id: mailing_list.id, message_type: 'Message::Letter', households: true, format: :json }
 
         expect(response_data[:valid_recipient_count]).to eq(15)
         expect(response_data[:invalid_recipient_count]).to eq(10)
@@ -68,11 +67,11 @@ describe Messages::RecipientCountsController do
   end
 
   def fabricate_invalid_person_recipient
-    Fabricate(:subscription, mailing_list: message.mailing_list)
+    Fabricate(:subscription, mailing_list: mailing_list)
   end
 
   def fabricate_valid_person_recipient
-    Fabricate(:subscription_with_subscriber_with_address, mailing_list: message.mailing_list)
+    Fabricate(:subscription_with_subscriber_with_address, mailing_list: mailing_list)
   end
 
   def fabricate_valid_households_recipient
