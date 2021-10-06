@@ -20,6 +20,7 @@ class People::HouseholdList
   end
 
   def household_count
+    people_without_household.count + household_people.count / 2
   end
 
   private

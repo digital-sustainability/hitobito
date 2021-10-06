@@ -957,23 +957,23 @@ de:
         valid:
           message/letter:
             one: "%{model_class} wird für eine Person erstellt."
-            other: "%{model_class} wird für %{count} Personen erstellt."
+            other_html: "%{model_class} wird für <span id='recipient_info_valid_count'></span> Personen erstellt."
           message/letter_with_invoice:
             one: "%{model_class} wird für eine Person erstellt."
-            other: "%{model_class} wird für %{count} Personen erstellt."
+            other_html: "%{model_class} wird für <span id='recipient_info_valid_count'></span> Personen erstellt."
           message/text_message:
             one: "%{model_class} wird für eine Person erstellt."
-            other: "%{model_class} wird für %{count} Personen erstellt."
+            other_html: "%{model_class} wird für <span id='recipient_info_valid_count'></span> Personen erstellt."
         invalid:
           message/letter:
             one: "Eine Person hat keine vollständige Adresse hinterlegt."
-            other: "%{count} weitere haben keine vollständige Adresse hinterlegt."
+            other_html: "<span id='recipient_info_invalid_count'></span> weitere haben keine vollständige Adresse hinterlegt."
           message/letter_with_invoice:
             one: "Eine Person hat keine vollständige Adresse hinterlegt."
-            other: "%{count} weitere haben keine vollständige Adresse hinterlegt."
+            other_html: "<span id='recipient_info_invalid_count'></span> weitere haben keine vollständige Adresse hinterlegt."
           message/text_message:
             one: "Eine Person hat keine vollständige Mobiltelefonnummer hinterlegt."
-            other: "%{count} weitere haben keine Mobiltelefonnummer hinterlegt."
+            other_html: "<span id='recipient_info_invalid_count'></span> weitere haben keine Mobiltelefonnummer hinterlegt."
     table:
       infos:
         sender: "Absender: %{mail}"

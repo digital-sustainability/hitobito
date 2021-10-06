@@ -7,7 +7,16 @@
   = f.error_messages
   .controls
     %p.text
-      = message_recipient_info(entry)
+      = spinner
+    = link_to([parent.group, parent, :subscriptions, format: :pdf], target: :_blank) do
+      #valid_recipient_info_one{ style: 'display: none;' }
+        = t(".recipient_info.valid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
+      #valid_recipient_info_other{ style: 'display: none;' }
+        = t(".recipient_info.valid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
+      #invalid_recipient_info_one{ style: 'display: none;' }
+        = t(".recipient_info.invalid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
+      #invalid_recipient_info_other{ style: 'display: none;' }
+        = t(".recipient_info.invalid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
 
   = f.hidden_field :type
 

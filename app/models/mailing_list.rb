@@ -122,18 +122,6 @@ class MailingList < ActiveRecord::Base
     MailingList::Subscribers.new(self, people_scope).people.count
   end
 
-  def household_count(people_scope = Person)
-    households_counted = []
-    people(people_scope).reject do |p|
-      person = Person.find(p.id)
-      counted = households_counted.include?(person.household_key)
-      households_counted << person.household_key
-      households_counted.compact!
-      counted
-    end.size
-
-  end
-
   def sync
     Synchronize::Mailchimp::Synchronizator.new(self).perform
   end

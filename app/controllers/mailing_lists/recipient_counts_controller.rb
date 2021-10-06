@@ -24,19 +24,42 @@ class MailingLists::RecipientCountsController < ApplicationController
     }.to_json
   end
 
+  private
+
   def valid_count
-    message.valid_recipient_count(households: true?(params[:households]))
+    @valid_count ||= true?(params[:households]) ?
+      household_list.household_count :
+      mailing_list.people_count(people_scope)
   end
 
   def invalid_count
-    message.invalid_recipient_count(households: true?(params[:households]))
+    @invalid_count ||= mailing_list.people_count - valid_people_recipient_count
+  end
+
+  def valid_people_recipient_count
+    if true?(params[:households])
+      household_list.household_people.count + household_list.people_without_household.count
+    else
+      valid_count
+    end
   end
 
   def authorize_action
-    authorize!(:show_recipient_count, message)
+    authorize!(:show_recipient_count, mailing_list)
   end
 
-  def message
-    Message.new(type: params[:message_type], mailing_list_id: params[:mailing_list_id])
+  def people_scope
+    case params[:message_type]
+    when 'Message::Letter' then Person.with_address
+    when 'Message::TextMessage' then Person.with_mobile
+    end
+  end
+
+  def household_list
+    @household_list ||= People::HouseholdList.new(mailing_list.people(people_scope).pluck(:id))
+  end
+
+  def mailing_list
+    @mailing_list ||= MailingList.find(params[:mailing_list_id])
   end
 end

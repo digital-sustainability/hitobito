@@ -34,7 +34,7 @@ class MailingListAbility < AbilityDsl::Base
       in_same_layer_if_no_subscriptions_in_below_layers
 
     permission(:layer_and_below_full).
-      may(:show, :index_subscriptions, :export_subscriptions, :create, :update, :destroy).
+      may(:show, :index_subscriptions, :export_subscriptions, :create, :update, :destroy, :show_recipient_count).
       in_same_layer
 
     general.group_not_deleted
