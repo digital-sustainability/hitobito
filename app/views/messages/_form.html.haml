@@ -10,13 +10,22 @@
       = spinner
     = link_to([parent.group, parent, :subscriptions, format: :pdf], target: :_blank) do
       #valid_recipient_info_one{ style: 'display: none;' }
-        = t(".recipient_info.valid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
+        = t(".recipient_info.without_households.valid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
       #valid_recipient_info_other{ style: 'display: none;' }
-        = t(".recipient_info.valid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
+        = t(".recipient_info.without_households.valid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
       #invalid_recipient_info_one{ style: 'display: none;' }
-        = t(".recipient_info.invalid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
+        = t(".recipient_info.without_households.invalid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
       #invalid_recipient_info_other{ style: 'display: none;' }
-        = t(".recipient_info.invalid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
+        = t(".recipient_info.without_households.invalid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
+
+      #valid_households_info_one{ style: 'display: none;' }
+        = t(".recipient_info.households.valid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
+      #valid_households_info_other{ style: 'display: none;' }
+        = t(".recipient_info.households.valid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
+      #invalid_households_info_one{ style: 'display: none;' }
+        = t(".recipient_info.households.invalid.#{entry.type.underscore}.one", model_class: entry.model_name.human)
+      #invalid_households_info_other{ style: 'display: none;' }
+        = t(".recipient_info.households.invalid.#{entry.type.underscore}.other_html", model_class: entry.model_name.human)
 
   = f.hidden_field :type
 
