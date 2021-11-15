@@ -84,6 +84,7 @@ class SubscriptionsController < CrudController
       .where(subscriber_type: klass.sti_name)
       .joins("INNER JOIN #{klass.quoted_table_name} " \
              "ON #{klass.quoted_table_name}.id = subscriptions.subscriber_id")
+      .includes(:subscriber)
   end
 
   def authorize_class
